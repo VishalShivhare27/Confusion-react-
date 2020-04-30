@@ -12,10 +12,10 @@ class Dishdetail extends Component {
             return(
                 <div className="col-12 col-md-5 m-1">
               	<Card>
-                    <CardImg top src={this.props.selectedDish.image} alt={this.props.selectedDish.name} />
+                    <CardImg top src={this.props.dish.image} alt={this.props.dish.name} />
                     <CardBody>
-                      <CardTitle>{this.props.selectedDish.name}</CardTitle>
-                      <CardText>{this.props.selectedDish.description}</CardText>
+                      <CardTitle>{this.props.dish.name}</CardTitle>
+                      <CardText>{this.props.dish.description}</CardText>
                     </CardBody>
                 </Card>
                 </div>
@@ -29,11 +29,11 @@ class Dishdetail extends Component {
 
     renderComments(comments) {
     	if(comments != null){
-    		const comments = this.props.selectedDish.comments.map((cc) => {
+    		const comments = this.props.dish.comments.map((cc) => {
            		return (
        		     	<li key={cc.id}>
            				<p>{cc.comment}</p>
-       			  		<p>--{cc.author},@nbsp{cc.date}</p>
+       			  		<p>--{cc.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(cc.date)))}</p>
        		    	</li> 	
        		   	);
         	});
@@ -54,16 +54,18 @@ class Dishdetail extends Component {
 
 
     render() {
-    	const selectedDish = this.props.selectedDish
-        if (selectedDish == null) {
+    	const dish = this.props.dish
+        if (dish == null) {
             return (<div></div>)
         }
-        const dishItem = this.renderDish(selectedDish)
-        const commentItem = this.renderComments(selectedDish.comments)
+        const dishItem = this.renderDish(dish)
+        const commentItem = this.renderComments(dish.comments)
         return (
+          <div class="container">
             <div className='row'>
                 {dishItem}
                 {commentItem}
+            </div>
             </div>
         );
     }
