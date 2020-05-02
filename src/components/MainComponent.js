@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import Home from './HomeComponent';
 import DishDetail from './DishDetailComponent';
+import About from './AboutusComponent';
 import { DISHES } from '../shared/dishes';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
@@ -11,7 +11,9 @@ import { COMMENTS } from '../shared/comments';
 import { PROMOTIONS } from '../shared/promotions';
 import { LEADERS } from '../shared/leaders';
 
+
 import {Switch,Route,Redirect} from 'react-router-dom';
+
 
 class Main extends Component {
 
@@ -58,6 +60,7 @@ class Main extends Component {
           <Route path='/menu/:dishId' component={DishWithId} />
 
           <Route exact path="/contactus" component={Contact}/>
+          <Route exact path="/aboutus" component={() => <About leaders={this.state.leaders} />} />
           <Redirect to="/home"/>
         </Switch>
         <Footer />
